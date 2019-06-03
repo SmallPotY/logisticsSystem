@@ -20,3 +20,4 @@ class ExpressInfoModel(Base):
     from_address = db.Column(db.String(32), comment="发件地")
     has_end = db.Column(db.SmallInteger, comment="是否完结")
     remarks = db.Column(db.String(3072), comment="备注信息")
+    identification = db.Column(db.String(64), comment="单号标识")

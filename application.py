@@ -9,6 +9,10 @@ import logging
 import os
 from flask_cors import CORS
 from web.httpCode import APIException
+import redis
+from jobs import JobsConfig
+
+redis_store = None
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -62,18 +66,23 @@ class Application(Flask):
             self.config.from_object('config.development')
         db.init_app(self)
 
+        # 创建链接到redis数据库的对象
+        global redis_store
+        self.redis_store = redis.StrictRedis(host=self.config['REDIS_HOST'], port=self.config['REDIS_PORT'],
+                                             password=self.config['REDIS_PARAMS'], db=self.config['DB'])
+
+        self.config.from_object(JobsConfig())
+
 
 def create_models(application):
-    from common.models.express.mExpressCode import ExpressCodeModel
-    from common.models.express.mExpressInfo import ExpressInfoModel
     with application.app_context():
         db.create_all()
 
 
-current_path = os.path.dirname(__file__)
-app = Application(__name__, template_folder=current_path + '/web/templates/',
-                  static_folder=current_path + '/web/static',
-                  root_path=current_path)
+root_path = os.path.dirname(__file__)
+app = Application(__name__, template_folder=root_path + '/web/templates/',
+                  static_folder=root_path + '/web/static',
+                  root_path=root_path)
 create_log(app)
 CORS(app, supports_credentials=True)
 

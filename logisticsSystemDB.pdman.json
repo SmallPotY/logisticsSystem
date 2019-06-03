@@ -85,6 +85,12 @@
               "chnname": "是否完结"
             },
             {
+              "name": "identification",
+              "type": "LongKey",
+              "remark": "",
+              "chnname": "单号标识"
+            },
+            {
               "name": "remarks",
               "type": "LongString",
               "remark": "",
@@ -213,6 +219,133 @@
             }
           ],
           "chnname": "快递代码"
+        }
+      ],
+      "graphCanvas": {
+        "nodes": [],
+        "edges": []
+      },
+      "associations": []
+    },
+    {
+      "name": "MEMBER",
+      "chnname": "成员模块",
+      "entities": [
+        {
+          "title": "MEMBER",
+          "fields": [
+            {
+              "name": "id",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "id",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": true
+            },
+            {
+              "name": "user_name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "用户名"
+            },
+            {
+              "name": "account_number",
+              "type": "Name",
+              "remark": "",
+              "chnname": "账号"
+            },
+            {
+              "name": "password_hash",
+              "type": "Intro",
+              "remark": "",
+              "chnname": "密码"
+            },
+            {
+              "name": "access_id",
+              "type": "Name",
+              "remark": "",
+              "chnname": "访问id"
+            },
+            {
+              "name": "secret_key",
+              "type": "Name",
+              "remark": "",
+              "chnname": "访问秘钥"
+            },
+            {
+              "name": "salt",
+              "type": "Name",
+              "remark": "",
+              "chnname": "加密盐"
+            },
+            {
+              "name": "user_role",
+              "type": "LongKey",
+              "remark": "",
+              "chnname": "角色"
+            },
+            {
+              "name": "enable_whitelist",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "启用白名单"
+            },
+            {
+              "name": "whitelist_address",
+              "type": "LongString",
+              "remark": "",
+              "chnname": "白名单授权地址"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "成员表"
         }
       ],
       "graphCanvas": {

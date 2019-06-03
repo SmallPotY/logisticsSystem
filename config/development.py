@@ -4,10 +4,10 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read("secret.ini")
 
-SERVER_PORT = 8889  # 端口号
-SERVER_HOST = '127.0.0.1'  # 访问地址
-DEBUG = True  # 调试模式
-RELEASE_VERSION = '1.0'  # 发布版本
+SERVER_PORT = 8889
+SERVER_HOST = '127.0.0.1'
+DEBUG = True
+RELEASE_VERSION = '1.0'
 
 DIALECT = 'mysql'
 DRIVER = 'pymysql'
@@ -24,4 +24,10 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 DOMAIN = "http://{}:{}".format(SERVER_HOST, SERVER_PORT)
 
+# ---------------------redis配置----------------------------
 
+REDIS_HOST = config.get('Redis', 'REDIS_HOST')
+REDIS_PORT = config.get('Redis', 'REDIS_PORT')
+REDIS_PARAMS = config.get('Redis', 'REDIS_PARAMS')
+DB = config.get('Redis', 'DB')
+REDIS_KEY = config.get('Redis', 'REDIS_KEY')

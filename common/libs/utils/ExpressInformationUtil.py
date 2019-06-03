@@ -9,9 +9,6 @@ branch = {
 }
 
 
-
-
-
 class ExpressInformationServe:
     @staticmethod
     def get_express_info(company, waybill_no):
@@ -36,6 +33,26 @@ class ExpressInformationServe:
         :param data: 数据内容
         :return:
         """
-        pass
+        if source in ['yto']:
+            return data
 
-        return ''
+        elif source in ['zto']:
+            ret = []
+            resp_data = data['data'][0]['traces']
+            resp_bill_code = data['data'][0]['billCode']
+
+            for i in resp_data:
+                tmp = {
+                    'ProcessInfo': i.get('desc', None),
+                    'Upload_Time': i.get('scanDate', None),
+                    'Waybill_No': resp_bill_code,
+                }
+                ret.append(tmp)
+            if not ret:
+                ret = {
+                    "message": "该单号暂无物流进展",
+                    "status": "0"
+                }
+            return ret
+
+        raise APIException('快递代码错误')
