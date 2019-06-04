@@ -61,10 +61,10 @@ class Application(Flask):
         self.config.from_object('config.baseSetting')
         env = platform.system()
         if env == "Linux":
-            print('**读取生产环境配置**')
+            # 读取生产环境配置
             self.config.from_object('config.production')
         else:
-            print('**读取开发环境配置**')
+            # 读取开发环境配置
             self.config.from_object('config.development')
         db.init_app(self)
 
@@ -75,9 +75,29 @@ class Application(Flask):
 
         self.config.from_object(JobsConfig())
 
-        scheduler = APScheduler()
-        scheduler.init_app(self)
-        scheduler.start()
+        if env == "Linux":
+            import atexit
+            import fcntl
+
+            f = open("scheduler.lock", "wb")
+            try:
+                fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                scheduler = APScheduler()
+                scheduler.init_app(app)
+                scheduler.start()
+            except Exception as err:
+                print('已存在一个定时任务')
+                pass
+
+            def unlock():
+                fcntl.flock(f, fcntl.LOCK_UN)
+                f.close()
+
+            atexit.register(unlock)
+        else:
+            scheduler = APScheduler()
+            scheduler.init_app(self)
+            scheduler.start()
 
 
 def create_models(application):
