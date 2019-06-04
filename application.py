@@ -12,6 +12,8 @@ from web.httpCode import APIException
 import redis
 from jobs import JobsConfig
 
+from flask_apscheduler import APScheduler
+
 redis_store = None
 
 
@@ -72,6 +74,10 @@ class Application(Flask):
                                              password=self.config['REDIS_PARAMS'], db=self.config['DB'])
 
         self.config.from_object(JobsConfig())
+
+        scheduler = APScheduler()
+        scheduler.init_app(self)
+        scheduler.start()
 
 
 def create_models(application):
