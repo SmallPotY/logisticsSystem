@@ -63,14 +63,6 @@ def job_import_mail_data(from_address, identification, key_word):
         print(err)
 
 
-d = 0
-
-
-def test(a, b):
-    global d
-    d = d + a + b
-    print('定时任务执行:', d)
-
 
 class JobsConfig:
     JOBS = [
@@ -85,17 +77,6 @@ class JobsConfig:
             # 'seconds': 5
 
         },
-        {
-            'id': 'test',
-            'func': test,
-            'args': (1, 2),
-            # 'trigger': 'cron',
-            # 'hour': 1,
-            # 'minute': 1
-            'trigger': 'interval',
-            'seconds': 3
-
-        }
     ]
 
 

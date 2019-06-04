@@ -76,17 +76,16 @@ class Application(Flask):
         self.config.from_object(JobsConfig())
 
         if env == "Linux":
+            # linux下可以使用文件独享锁让定时任务只启动一次
             import atexit
             import fcntl
-
             f = open("scheduler.lock", "wb")
             try:
                 fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
                 scheduler = APScheduler()
-                scheduler.init_app(app)
+                scheduler.init_app(self)
                 scheduler.start()
-            except Exception as err:
-                print('已存在一个定时任务')
+            except Exception:
                 pass
 
             def unlock():
@@ -95,6 +94,7 @@ class Application(Flask):
 
             atexit.register(unlock)
         else:
+
             scheduler = APScheduler()
             scheduler.init_app(self)
             scheduler.start()
