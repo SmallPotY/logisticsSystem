@@ -96,8 +96,8 @@ def get_mail_attachment(email_host, email_user, email_pass, key_word):
 
 
 if __name__ == '__main__':
-    emailhost = "imap.exmail.qq.com"
-    emailuser = "jie.yang@hxh-ltd.com"
-    emailpass = "Jyang19930621+-*/"
-    keywords = "预警编号5372：肇庆圆通出仓数据"
+    emailhost = "*"
+    emailuser = "*"
+    emailpass = "*"
+    keywords = "*"
     get_mail_attachment(emailhost, emailuser, emailpass, keywords)
