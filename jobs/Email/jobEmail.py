@@ -27,13 +27,6 @@ def decode_str(s):
     return value
 
 
-# 提取文件名，去掉后缀
-def GetFileName(filename):
-    (filepath, tempfilename) = os.path.split(filename)
-    (shotname, extension) = os.path.splitext(tempfilename)
-    return shotname
-
-
 # 下载邮件附件
 def get_mail_attachment(email_host, email_user, email_pass, key_word):
     # 需要验证的邮件服务
