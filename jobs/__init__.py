@@ -91,6 +91,15 @@ def job_update_progress(interval):
         request_aip(parameter)
 
 
+c = 1
+
+
+def job_check(s):
+    global c
+    c += s
+    print(c)
+
+
 class JobsConfig:
     JOBS = [
         {
@@ -114,7 +123,13 @@ class JobsConfig:
             'minutes': 2
             # 'hours': 4
         },
-
+        {
+            'id': 'job_check',
+            'func': job_check,
+            'args': (1,),
+            'trigger': 'interval',
+            'seconds': 5
+        },
     ]
 
 
