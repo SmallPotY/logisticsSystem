@@ -66,13 +66,12 @@ class Application(Flask):
         else:
             # 读取开发环境配置
             self.config.from_object('config.development')
-        db.init_app(self)
 
         # 创建链接到redis数据库的对象
         global redis_store
         self.redis_store = redis.StrictRedis(host=self.config['REDIS_HOST'], port=self.config['REDIS_PORT'],
                                              password=self.config['REDIS_PARAMS'], db=self.config['DB'])
-
+        db.init_app(self)
         self.config.from_object(JobsConfig())
 
         if env == "Linux":
@@ -105,10 +104,11 @@ def create_models(application):
         db.create_all()
 
 
-root_path = os.path.dirname(__file__)
-app = Application(__name__, template_folder=root_path + '/web/templates/',
-                  static_folder=root_path + '/web/static',
-                  root_path=root_path)
+APP_ROOT_PATH = os.path.dirname(__file__)
+app = Application(__name__, template_folder=APP_ROOT_PATH + '/web/templates/',
+                  static_folder=APP_ROOT_PATH + '/web/static',
+                  root_path=APP_ROOT_PATH)
+
 create_log(app)
 CORS(app, supports_credentials=True)
 

@@ -5,7 +5,6 @@ from common.libs.ExternalApi.ZTO import request_zto_api
 from common.libs.ExternalApi.YTO import request_yto_api
 from web.httpCode import APIException
 
-
 branch = {
     'zto': request_zto_api,
     'yto': request_yto_api
@@ -61,8 +60,10 @@ class ExpressInformationServe:
         raise APIException('快递代码错误')
 
     @staticmethod
-    def save_to_redis(waybill_info, waybill_company, waybill_no, action, order_time, to_address, from_address,
-                      identification, queue):
+    def save_to_redis(waybill_info, waybill_company, waybill_no, action, order_time,
+                      to_address='default',
+                      from_address='default',
+                      identification='default', queue='list'):
         """
         将信息暂存到redis中,等待入库
 

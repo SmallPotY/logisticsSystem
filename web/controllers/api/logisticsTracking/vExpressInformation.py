@@ -11,9 +11,9 @@ def get_delivery_node():
     form = GetDeliveryNodeForm().validate_for_forms().to_dict()
 
     data = ExpressInformationServe.get_express_info(waybill_no=form['Waybill_No'], company=form['Waybill_Company'])
-
+    data = ExpressInformationServe.unified_format(data=data, source=form['Waybill_Company'])
     resp = {
-        'data': ExpressInformationServe.unified_format(data=data, source=form['Waybill_Company'])
+        'data': data
     }
 
     if form['dataStorage'] == 'action':
