@@ -5,9 +5,9 @@ from configparser import ConfigParser
 from common.libs.utils.ExpressInformationUtil import ExpressInformationServe
 from jobs.TimedTask.jobUpdateProgress import get_update_progress
 from log import log_file_path
-from common.libs.tools.Log import TNLog
+from common.libs.tools.Log import SystemLog
 
-timedTaskLog = TNLog('定时任务日志', log_file_path)
+timedTaskLog = SystemLog('定时任务日志', log_file_path).get_log()
 
 config = ConfigParser()
 config.read("secret.ini")
@@ -91,15 +91,6 @@ def job_update_progress(interval):
         request_aip(parameter)
 
 
-c = 1
-
-
-def job_check(s):
-    global c
-    c += s
-    print(c)
-
-
 class JobsConfig:
     JOBS = [
         {
@@ -120,16 +111,10 @@ class JobsConfig:
             # 'hour': 1,
             # 'minute': 1
             'trigger': 'interval',
-            'minutes': 2
-            # 'hours': 4
+            # 'minutes': 2
+            'hours': 4
         },
-        {
-            'id': 'job_check',
-            'func': job_check,
-            'args': (1,),
-            'trigger': 'interval',
-            'seconds': 5
-        },
+
     ]
 
 

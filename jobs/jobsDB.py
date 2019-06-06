@@ -5,10 +5,9 @@ from DBUtils.PooledDB import PooledDB
 import platform
 from configparser import ConfigParser
 from log import log_file_path
-from common.libs.tools.Log import TNLog
+from common.libs.tools.Log import SystemLog
 
-timedTaskLog = TNLog('定时任务日志', log_file_path)
-
+timedTaskLog = SystemLog('定时任务日志', log_file_path).get_log()
 
 config = ConfigParser()
 config.read("secret.ini")
