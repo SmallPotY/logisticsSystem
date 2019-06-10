@@ -43,7 +43,7 @@ def job_import_mail_data(from_address, identification, key_word):
     :return:
     """
     timedTaskLog.info('执行=>job_import_mail_data')
-
+    print('执行了一次导入邮件任务')
     ret = get_mail_attachment(email_host=emailHost, email_user=emailUser, email_pass=emailPass,
                               key_word=key_word)
 
@@ -75,6 +75,7 @@ def job_import_mail_data(from_address, identification, key_word):
 
 def job_update_progress(interval):
     timedTaskLog.info('执行=>job_update_progress')
+    print('执行了一次更新快递状态任务')
 
     item = get_update_progress(interval)
 
@@ -98,8 +99,8 @@ class JobsConfig:
             'func': job_import_mail_data,
             'args': ('广东省', '肇庆唯品会', '预警编号5372：肇庆圆通出仓数据'),
             'trigger': 'cron',
-            'hour': 1,
-            'minute': 1
+            'hour': 11,
+            'minute': 8
             # 'trigger': 'interval',
             # 'seconds': 5
         },
@@ -111,8 +112,8 @@ class JobsConfig:
             # 'hour': 1,
             # 'minute': 1
             'trigger': 'interval',
-            # 'minutes': 2
-            'hours': 4
+            'minutes': 30
+            # 'hours': 4
         },
 
     ]

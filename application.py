@@ -84,9 +84,10 @@ class Application(Flask):
                 scheduler = APScheduler()
                 scheduler.init_app(self)
                 scheduler.start()
+                print('启动定时任务')
             except Exception:
                 pass
-
+                print('仅存在一次定时任务,当前已存在一个')
             def unlock():
                 fcntl.flock(f, fcntl.LOCK_UN)
                 f.close()
