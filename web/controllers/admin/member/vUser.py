@@ -27,7 +27,7 @@ def user_login():
     return APIResponse(data=data)
 
 
-@admin.route('/get_info', methods=['GET'])
+@admin.route('/get_info', methods=['POST'])
 def get_info():
     form = UserGetInfoForm().validate_for_forms().to_dict()
 
