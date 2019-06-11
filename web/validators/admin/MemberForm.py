@@ -38,4 +38,4 @@ class UserLoginForm(BaseForm):
 
 
 class UserGetInfoForm(BaseForm):
-    token = StringField(validators=[DataRequired('缺少token')])
+    token = StringField()
