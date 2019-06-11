@@ -106,8 +106,8 @@ def create_models(application):
 
 
 APP_ROOT_PATH = os.path.dirname(__file__)
-app = Application(__name__, template_folder=APP_ROOT_PATH + '/web/templates/',
-                  static_folder=APP_ROOT_PATH + '/web/static',
+app = Application(__name__, template_folder=APP_ROOT_PATH + '/web/static/dist',
+                  static_folder=APP_ROOT_PATH + '/web/static/dist',
                   root_path=APP_ROOT_PATH)
 
 create_log(app)

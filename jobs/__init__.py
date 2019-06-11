@@ -99,8 +99,8 @@ class JobsConfig:
             'func': job_import_mail_data,
             'args': ('广东省', '肇庆唯品会', '预警编号5372：肇庆圆通出仓数据'),
             'trigger': 'cron',
-            'hour': 11,
-            'minute': 8
+            'hour': 1,
+            'minute': 1
             # 'trigger': 'interval',
             # 'seconds': 5
         },
@@ -112,8 +112,8 @@ class JobsConfig:
             # 'hour': 1,
             # 'minute': 1
             'trigger': 'interval',
-            'minutes': 30
-            # 'hours': 4
+            # 'minutes': 30
+            'hours': 4
         },
 
     ]

@@ -32,3 +32,22 @@ class ReqExpressDataForm(BaseForm):
                 self.dateRang.data = None
                 del err
         return self
+
+
+class ReqExpressHomeForm(BaseForm):
+    dateRang = StringField()
+    company = StringField()
+
+    def validate_for_forms(self):
+        valid = super(BaseForm, self).validate()
+        if not valid:
+            raise ParameterException(msg=self.errors)
+
+        if self.dateRang.data:
+            try:
+                DateTimeTools.string_conversion_date(self.dateRang.data[0])
+                DateTimeTools.string_conversion_date(self.dateRang.data[1])
+            except Exception as err:
+                self.dateRang.data = None
+                del err
+        return self
