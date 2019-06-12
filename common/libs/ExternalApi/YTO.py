@@ -56,6 +56,13 @@ def request_yto_api(waybill_no):
 
     url = 'http://MarketingInterface.yto.net.cn'
 
-    res = json.loads(requests.post(url=url, data=data).text)
+    try:
+        res = json.loads(requests.post(url=url, data=data).text)
+    except Exception as err:
+        print(err)
+        res = {
+            "message": '网络请求异常~',
+            "status": "-1"
+        }
 
     return res

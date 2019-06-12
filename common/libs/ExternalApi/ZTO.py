@@ -35,6 +35,13 @@ def request_zto_api(waybill_no):
         'x-datadigest': data_digest
     }
 
-    res = json.loads(requests.post(url=url, data=post_fields, headers=headers).text)
+    try:
+        res = json.loads(requests.post(url=url, data=post_fields, headers=headers).text)
+    except Exception as err:
+        print(err)
+        res = {
+            "message": '网络请求异常~',
+            "status": "-1"
+        }
 
     return res
