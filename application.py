@@ -12,7 +12,7 @@ from web.httpCode import APIException
 import redis
 from jobs import JobsConfig
 
-from flask_apscheduler import APScheduler
+# from flask_apscheduler import APScheduler
 
 redis_store = None
 
@@ -74,30 +74,30 @@ class Application(Flask):
         db.init_app(self)
         self.config.from_object(JobsConfig())
 
-        if env == "Linux":
-            # linux下可以使用文件独享锁让定时任务只启动一次
-            import atexit
-            import fcntl
-            f = open("scheduler.lock", "wb")
-            try:
-                fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
-                scheduler = APScheduler()
-                scheduler.init_app(self)
-                scheduler.start()
-                print('启动定时任务')
-            except Exception:
-                pass
-                print('仅存在一次定时任务,当前已存在一个')
-            def unlock():
-                fcntl.flock(f, fcntl.LOCK_UN)
-                f.close()
-
-            atexit.register(unlock)
-        else:
-
-            scheduler = APScheduler()
-            scheduler.init_app(self)
-            scheduler.start()
+        # if env == "Linux":
+        #     # linux下可以使用文件独享锁让定时任务只启动一次
+        #     import atexit
+        #     import fcntl
+        #     f = open("scheduler.lock", "wb")
+        #     try:
+        #         fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        #         scheduler = APScheduler()
+        #         scheduler.init_app(self)
+        #         scheduler.start()
+        #         print('启动定时任务')
+        #     except Exception:
+        #         pass
+        #         print('仅存在一次定时任务,当前已存在一个')
+        #     def unlock():
+        #         fcntl.flock(f, fcntl.LOCK_UN)
+        #         f.close()
+        #
+        #     atexit.register(unlock)
+        # else:
+        #
+        #     scheduler = APScheduler()
+        #     scheduler.init_app(self)
+        #     scheduler.start()
 
 
 def create_models(application):
